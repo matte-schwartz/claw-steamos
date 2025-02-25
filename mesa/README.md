@@ -1,0 +1,1 @@
+See https://gitlab.freedesktop.org/mesa/mesa/-/issues/12633 for ongoing work to get gamescope working with upstream mesa. For now, use the patch from Maarten in this directory and you avoid needing patched gamescope. This patch also fixes mouse input in gamescope-session.

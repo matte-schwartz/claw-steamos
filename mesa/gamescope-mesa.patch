@@ -1,0 +1,30 @@
+From: Maarten Lankhorst <dev@lankhorst.se>
+Date: Mon Feb 17 14:55:29 2025 -0800
+
+anv: Mark images with format modifiers set as scanout.
+
+We currently use the presence of struct WSI_IMAGE_CREATE_INFO_MESA.scanout to mark the BO as scanout,
+but this only handles the linear case, and fails when drm format modifiers are used.
+
+Also handle the case of exportable BO with tiling set to VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT.
+This fixes the gamescope handling of using vulkan allocated images for scanout.
+
+    
+Link: https://gitlab.freedesktop.org/drm/xe/kernel/-/issues/4292#note_2784316
+Signed-off-by: Maarten Lankhorst <dev@lankhorst.se>
+Signed-off-by: Matthew Schwartz <matthew.schwartz@linux.dev>
+
+diff --git a/src/intel/vulkan/anv_device.c b/src/intel/vulkan/anv_device.c
+index 1884932bbc7..cbc1b4aad87 100644
+--- a/src/intel/vulkan/anv_device.c
++++ b/src/intel/vulkan/anv_device.c
+@@ -1533,6 +1533,9 @@ VkResult anv_AllocateMemory(
+           dedicated_info->image != VK_NULL_HANDLE) {
+          ANV_FROM_HANDLE(anv_image, image, dedicated_info->image);
+ 
++         if (image->vk.tiling == VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT)
++            alloc_flags |= ANV_BO_ALLOC_SCANOUT;
++
+          /* Apply implicit sync to be compatible with clients relying on
+           * implicit fencing. This matches the behavior in iris i915_batch
+           * submit. An example client is VA-API (iHD), so only dedicated
