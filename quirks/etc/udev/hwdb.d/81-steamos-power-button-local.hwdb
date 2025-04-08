@@ -1,0 +1,8 @@
+# MSI
+evdev:name:AT Translated Set 2 keyboard:dmi:*svnMicro-StarInternationalCo.,Ltd.:pnClawA1M:*
+evdev:name:Power Button:dmi:*svnMicro-StarInternationalCo.,Ltd.:pnClawA1M:*
+evdev:name:AT Translated Set 2 keyboard:dmi:*svnMicro-StarInternationalCo.,Ltd.:pnClaw7AI+A2VM:*
+evdev:name:Power Button:dmi:*svnMicro-StarInternationalCo.,Ltd.:pnClaw7AI+A2VM:*
+evdev:name:AT Translated Set 2 keyboard:dmi:*svnMicro-StarInternationalCo.,Ltd.:pnClaw8AI+A2VM:*
+evdev:name:Power Button:dmi:*svnMicro-StarInternationalCo.,Ltd.:pnClaw8AI+A2VM:*
+ STEAMOS_POWER_BUTTON=1
