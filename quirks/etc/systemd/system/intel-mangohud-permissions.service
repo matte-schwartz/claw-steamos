@@ -1,0 +1,13 @@
+[Unit]
+Description=Set read permission on intel-rapl energy_uj
+After=multi-user.target
+# If needed, ensure device nodes are settled, you can also do:
+# After=systemd-udev-settle.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/chmod o+r /sys/class/powercap/intel-rapl:0/energy_uj
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

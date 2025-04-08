@@ -1,0 +1,13 @@
+[Unit]
+Description=Set MSI Claw Controller mode to XInput
+After=multi-user.target
+# Optionally, you can ensure sysfs is mounted and the HID driver is present:
+# After=systemd-udev-settle.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/sh -c 'echo "xinput" > /sys/bus/hid/drivers/hid-msi-claw/0003:0DB0:1901.0002/gamepad_mode_current'
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
